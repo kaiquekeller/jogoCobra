@@ -22,7 +22,7 @@ function jogar(){
     if (apple.teveColisao(cobra)){
         placar.pontuacao+=apple.valor;
         cobra.crescer();
-        cobra.velocidade++;
+        cobra.velocidade += 0.2;
         trilha.tocar("cobraComeu")
         apple = new Apple(10);      
     }
@@ -48,12 +48,22 @@ let apple = new Apple(10);
 placar.desenhar();
 tela.desenhar();
 
-document.addEventListener("keydown",(evento) =>{  
-    if ((evento.key== "8") && (cobra.direcao=="direita"  || cobra.direcao=="esquerda"))   cobra.direcao="cima";      
-    if ((evento.key== "6") && (cobra.direcao=="cima"  || cobra.direcao=="baixo"))         cobra.direcao="direita";
-    if ((evento.key== "2") && (cobra.direcao=="direita"  || cobra.direcao=="esquerda"))   cobra.direcao="baixo";
-    if ((evento.key== "4") && (cobra.direcao=="cima"  || cobra.direcao=="baixo"))         cobra.direcao="esquerda";
-})
+document.addEventListener("keydown", (evento) => {
+    const tecla = evento.key.toLowerCase();
+
+    if (tecla == "w" && (cobra.direcao == "direita" || cobra.direcao == "esquerda"))
+        cobra.direcao = "cima";
+
+    if (tecla == "d" && (cobra.direcao == "cima" || cobra.direcao == "baixo"))
+        cobra.direcao = "direita";
+
+    if (tecla == "s" && (cobra.direcao == "direita" || cobra.direcao == "esquerda"))
+        cobra.direcao = "baixo";
+
+    if (tecla == "a" && (cobra.direcao == "cima" || cobra.direcao == "baixo"))
+        cobra.direcao = "esquerda";
+});
+
 
 document.addEventListener("click",(evento) =>{  
     if ((cobra.direcao=="direita"  || cobra.direcao=="esquerda") && (!primeiroClique)) {
